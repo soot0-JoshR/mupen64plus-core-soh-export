@@ -1,0 +1,28 @@
+{
+  "mappings": [
+    {
+      "id_type": "crc1",
+      "id_value": "ec7011b7",
+      "name": "Ocarina of Time (U) 1.0 / 1.1 / 1.2",
+      "slot_offsets": [32, 5184, 10432],
+      "save_size": 5200,
+      "field_map": "default"
+    },
+    {
+      "id_type": "md5",
+      "id_value": "5bd1fe107bf8106b2ab6650abecd54d6",
+      "name": "Ocarina of Time (U) 1.0",
+      "slot_offsets": [32, 5184, 10432],
+      "save_size": 5200,
+      "field_map": "default"
+    },
+    {
+      "id_type": "md5",
+      "id_value": "f0b7f35375f9cc8ca1b2d8b2c7b2c7b2",
+      "name": "Ocarina of Time (U) 1.2",
+      "slot_offsets": [32, 5184, 10432],
+      "save_size": 5200,
+      "field_map": "default"
+    }
+  ]
+}

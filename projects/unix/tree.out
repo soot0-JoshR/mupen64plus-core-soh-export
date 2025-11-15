@@ -1,0 +1,204 @@
+.
+├── Makefile
+├── _obj
+│   ├── api
+│   │   ├── callbacks.d
+│   │   ├── callbacks.o
+│   │   ├── common.d
+│   │   ├── common.o
+│   │   ├── config.d
+│   │   ├── config.o
+│   │   ├── debugger.d
+│   │   ├── debugger.o
+│   │   ├── frontend.d
+│   │   ├── frontend.o
+│   │   ├── vidext.d
+│   │   └── vidext.o
+│   ├── asm_defines
+│   │   ├── asm_defines.d
+│   │   └── asm_defines.o
+│   ├── backends
+│   │   ├── api
+│   │   │   ├── video_capture_backend.d
+│   │   │   └── video_capture_backend.o
+│   │   ├── clock_ctime_plus_delta.d
+│   │   ├── clock_ctime_plus_delta.o
+│   │   ├── dummy_video_capture.d
+│   │   ├── dummy_video_capture.o
+│   │   ├── file_storage.d
+│   │   ├── file_storage.o
+│   │   └── plugins_compat
+│   │       ├── audio_plugin_compat.d
+│   │       ├── audio_plugin_compat.o
+│   │       ├── input_plugin_compat.d
+│   │       └── input_plugin_compat.o
+│   ├── device
+│   │   ├── cart
+│   │   │   ├── af_rtc.d
+│   │   │   ├── af_rtc.o
+│   │   │   ├── cart.d
+│   │   │   ├── cart.o
+│   │   │   ├── cart_rom.d
+│   │   │   ├── cart_rom.o
+│   │   │   ├── eeprom.d
+│   │   │   ├── eeprom.o
+│   │   │   ├── flashram.d
+│   │   │   ├── flashram.o
+│   │   │   ├── is_viewer.d
+│   │   │   ├── is_viewer.o
+│   │   │   ├── sram.d
+│   │   │   └── sram.o
+│   │   ├── controllers
+│   │   │   ├── game_controller.d
+│   │   │   ├── game_controller.o
+│   │   │   ├── paks
+│   │   │   │   ├── biopak.d
+│   │   │   │   ├── biopak.o
+│   │   │   │   ├── mempak.d
+│   │   │   │   ├── mempak.o
+│   │   │   │   ├── rumblepak.d
+│   │   │   │   ├── rumblepak.o
+│   │   │   │   ├── transferpak.d
+│   │   │   │   └── transferpak.o
+│   │   │   ├── vru_controller.d
+│   │   │   └── vru_controller.o
+│   │   ├── dd
+│   │   │   ├── dd_controller.d
+│   │   │   ├── dd_controller.o
+│   │   │   ├── disk.d
+│   │   │   └── disk.o
+│   │   ├── device.d
+│   │   ├── device.o
+│   │   ├── gb
+│   │   │   ├── gb_cart.d
+│   │   │   ├── gb_cart.o
+│   │   │   ├── m64282fp.d
+│   │   │   ├── m64282fp.o
+│   │   │   ├── mbc3_rtc.d
+│   │   │   └── mbc3_rtc.o
+│   │   ├── memory
+│   │   │   ├── memory.d
+│   │   │   └── memory.o
+│   │   ├── pif
+│   │   │   ├── bootrom_hle.d
+│   │   │   ├── bootrom_hle.o
+│   │   │   ├── cic.d
+│   │   │   ├── cic.o
+│   │   │   ├── n64_cic_nus_6105.d
+│   │   │   ├── n64_cic_nus_6105.o
+│   │   │   ├── pif.d
+│   │   │   └── pif.o
+│   │   ├── r4300
+│   │   │   ├── cached_interp.d
+│   │   │   ├── cached_interp.o
+│   │   │   ├── cp0.d
+│   │   │   ├── cp0.o
+│   │   │   ├── cp1.d
+│   │   │   ├── cp1.o
+│   │   │   ├── cp2.d
+│   │   │   ├── cp2.o
+│   │   │   ├── idec.d
+│   │   │   ├── idec.o
+│   │   │   ├── interrupt.d
+│   │   │   ├── interrupt.o
+│   │   │   ├── pure_interp.d
+│   │   │   ├── pure_interp.o
+│   │   │   ├── r4300_core.d
+│   │   │   ├── r4300_core.o
+│   │   │   ├── recomp.d
+│   │   │   ├── recomp.o
+│   │   │   ├── tlb.d
+│   │   │   ├── tlb.o
+│   │   │   └── x86_64
+│   │   │       ├── assemble.d
+│   │   │       ├── assemble.o
+│   │   │       ├── dyna_start.o
+│   │   │       ├── dynarec.d
+│   │   │       ├── dynarec.o
+│   │   │       ├── regcache.d
+│   │   │       └── regcache.o
+│   │   ├── rcp
+│   │   │   ├── ai
+│   │   │   │   ├── ai_controller.d
+│   │   │   │   └── ai_controller.o
+│   │   │   ├── mi
+│   │   │   │   ├── mi_controller.d
+│   │   │   │   └── mi_controller.o
+│   │   │   ├── pi
+│   │   │   │   ├── pi_controller.d
+│   │   │   │   └── pi_controller.o
+│   │   │   ├── rdp
+│   │   │   │   ├── fb.d
+│   │   │   │   ├── fb.o
+│   │   │   │   ├── rdp_core.d
+│   │   │   │   └── rdp_core.o
+│   │   │   ├── ri
+│   │   │   │   ├── ri_controller.d
+│   │   │   │   └── ri_controller.o
+│   │   │   ├── rsp
+│   │   │   │   ├── rsp_core.d
+│   │   │   │   └── rsp_core.o
+│   │   │   ├── si
+│   │   │   │   ├── si_controller.d
+│   │   │   │   └── si_controller.o
+│   │   │   └── vi
+│   │   │       ├── vi_controller.d
+│   │   │       └── vi_controller.o
+│   │   └── rdram
+│   │       ├── rdram.d
+│   │       └── rdram.o
+│   ├── main
+│   │   ├── cheat.d
+│   │   ├── cheat.o
+│   │   ├── eventloop.d
+│   │   ├── eventloop.o
+│   │   ├── main.d
+│   │   ├── main.o
+│   │   ├── rom.d
+│   │   ├── rom.o
+│   │   ├── savestates.d
+│   │   ├── savestates.o
+│   │   ├── screenshot.d
+│   │   ├── screenshot.o
+│   │   ├── sdl_key_converter.d
+│   │   ├── sdl_key_converter.o
+│   │   ├── util.d
+│   │   ├── util.o
+│   │   ├── workqueue.d
+│   │   └── workqueue.o
+│   ├── osal
+│   │   ├── dynamiclib_unix.d
+│   │   ├── dynamiclib_unix.o
+│   │   ├── files_unix.d
+│   │   └── files_unix.o
+│   ├── osd
+│   │   ├── oglft_c.d
+│   │   ├── oglft_c.o
+│   │   ├── osd.d
+│   │   └── osd.o
+│   ├── plugin
+│   │   ├── dummy_audio.d
+│   │   ├── dummy_audio.o
+│   │   ├── dummy_input.d
+│   │   ├── dummy_input.o
+│   │   ├── dummy_rsp.d
+│   │   ├── dummy_rsp.o
+│   │   ├── dummy_video.d
+│   │   ├── dummy_video.o
+│   │   ├── plugin.d
+│   │   └── plugin.o
+│   ├── soh
+│   │   ├── soh_export.d
+│   │   └── soh_export.o
+│   └── subprojects
+│       ├── md5
+│       │   ├── md5.d
+│       │   └── md5.o
+│       └── oglft
+│           ├── OGLFT.d
+│           └── OGLFT.o
+├── libmupen64plus.so.2 -> libmupen64plus.so.2.0.0
+├── libmupen64plus.so.2.0.0
+└── tree.out
+
+35 directories, 167 files

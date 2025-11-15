@@ -31,6 +31,64 @@
 
 #define SRAM_ADDR_MASK UINT32_C(0x0000ffff)
 
+#ifdef ENABLE_SOH_EXPORT
+#include <unistd.h>
+#include <sys/wait.h>
+#include <limits.h>
+#include <stdio.h>
+
+/* Asynchronous exporter launch */
+static void soh_export_sram_async(const char* rom_path, const char* sra_path)
+{
+    char exe_path[PATH_MAX];
+    const char* custom_path = getenv("SOH_EXPORT_PATH");
+
+    /* Prefer explicit user override */
+    if (custom_path && access(custom_path, X_OK) == 0) {
+        strncpy(exe_path, custom_path, sizeof(exe_path));
+    }
+    /* Standard dev-tree path */
+    else if (access("tools/soh_export", X_OK) == 0) {
+        strncpy(exe_path, "tools/soh_export", sizeof(exe_path));
+    }
+    /* Local dir fallback */
+    else if (access("./soh_export", X_OK) == 0) {
+        strncpy(exe_path, "./soh_export", sizeof(exe_path));
+    }
+    /* CWD-based fallback */
+    else {
+        char cwd[PATH_MAX];
+        if (getcwd(cwd, sizeof(cwd))) {
+            snprintf(exe_path, sizeof(exe_path), "%s/../tools/soh_export", cwd);
+        } else {
+            strncpy(exe_path, "tools/soh_export", sizeof(exe_path));
+        }
+    }
+
+    /* Spawn exporter */
+    pid_t pid = fork();
+    if (pid == 0) {
+        char *const argv[] = {
+            (char*)exe_path,
+            "--sra", (char*)sra_path,
+            "--rom", (char*)rom_path,
+            "--outdir", "SoH",
+            "--slot", "0",
+            "--force",
+            NULL
+        };
+        execvp(argv[0], argv);
+        _exit(127);
+    } else if (pid > 0) {
+        int status;
+        waitpid(pid, &status, WNOHANG);
+#ifdef DEBUG_SAVES
+        DebugMessage(M64MSG_INFO, "SoH export launched: %s", exe_path);
+#endif
+    }
+}
+#endif /* ENABLE_SOH_EXPORT */
+
 void format_sram(uint8_t* mem)
 {
     memset(mem, 0xff, SRAM_SIZE);
@@ -96,4 +154,17 @@ void write_sram(void* opaque, uint32_t address, uint32_t value, uint32_t mask)
     masked_write((uint32_t*)(mem + address), value, mask);
 
     sram->istorage->save(sram->storage, address, sizeof(value));
+
+#ifdef ENABLE_SOH_EXPORT
+    /* After SRAM write → run exporter */
+    const char* rom_path = sram->istorage->get_rom_path ?
+                           sram->istorage->get_rom_path(sram->storage) :
+                           "UNKNOWN_ROM.z64";
+
+    const char* sra_path = sram->istorage->get_save_filename ?
+                           sram->istorage->get_save_filename(sram->storage) :
+                           "UNKNOWN.sra";
+
+    soh_export_sram_async(rom_path, sra_path);
+#endif
 }

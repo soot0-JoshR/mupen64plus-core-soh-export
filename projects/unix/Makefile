@@ -599,6 +599,9 @@ SOURCE = \
     $(SRCDIR)/plugin/dummy_rsp.c \
     $(MINIZIP_SOURCE)
 
+# SoH exporter
+SOURCE += $(SRCDIR)/soh/soh_export.c
+
 # MD5 lib
 SOURCE += \
     $(SUBDIR)/md5/md5.c
